@@ -10,7 +10,7 @@ import (
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-func Modify(deployname, namespace, value, label, tp string)error{
+func modify(deployname, namespace, value, label, tp string)error{
 	deploy, err := model.Client.AppsV1().Deployments(namespace).Get(context.TODO(), deployname, v1.GetOptions{})
 	if err != nil{
 		fmt.Println(err.Error())
@@ -30,7 +30,7 @@ func Modify(deployname, namespace, value, label, tp string)error{
 	}
 	return nil
 }
-func Create(deployname, namespace, value string)error{
+func create(deployname, namespace, value string)error{
 	deploy, err := model.Client.AppsV1().Deployments(namespace).Get(context.TODO(), deployname, v1.GetOptions{})
 	if err != nil{
 		fmt.Println(err.Error())
@@ -63,7 +63,7 @@ func Create(deployname, namespace, value string)error{
 	}
 	return nil
 }
-func Delete(deployname, namespace string)error{
+func delete(deployname, namespace string)error{
 	deploy, err := model.Client.AppsV1().Deployments(namespace).Get(context.TODO(), deployname, v1.GetOptions{})
 	if err != nil{
 		fmt.Println(err.Error())
@@ -80,7 +80,7 @@ func Delete(deployname, namespace string)error{
 	return nil
 }
 
-func List(namespace string)error{
+func list(namespace string)error{
 	deploy, err := model.Client.AppsV1().Deployments(namespace).List(context.TODO(), v1.ListOptions{})
 	if err != nil{
 		fmt.Println(err.Error())
