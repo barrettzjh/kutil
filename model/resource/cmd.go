@@ -19,10 +19,6 @@ var modifyCmd = &cobra.Command{
 	Short: "modify resource",
 	Long:  `可以修改某个命名空间下某个deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if !ArgsCheck(args){
-			fmt.Println("args Error")
-			return
-		}
 		ns, _ := cmd.Flags().GetString("namespace")
 		lb, _ := cmd.Flags().GetString("label")
 		tp, _ := cmd.Flags().GetString("type")
@@ -34,14 +30,10 @@ var modifyCmd = &cobra.Command{
 }
 
 var createCmd = &cobra.Command{
-	Use:   "resource [modify] [deploy] [100Mi]",
+	Use:   "create [deploy] [100Mi]",
 	Short: "create resource",
 	Long:  `可以创建某个命名空间下某个deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if !ArgsCheck(args){
-			fmt.Println("args Error")
-			return
-		}
 		ns, _ := cmd.Flags().GetString("namespace")
 		if err := Create(args[1], ns, args[2]); err != nil{
 			fmt.Println(err.Error())
@@ -51,14 +43,10 @@ var createCmd = &cobra.Command{
 }
 
 var deleteCmd = &cobra.Command{
-	Use:   "resource [modify] [deploy] [100Mi]",
+	Use:   "delete [deploy]",
 	Short: "delete resource",
 	Long:  `可以删除某个命名空间下某个deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if !ArgsCheck(args){
-			fmt.Println("args Error")
-			return
-		}
 		ns, _ := cmd.Flags().GetString("namespace")
 		if err := Delete(args[1], ns); err != nil{
 			fmt.Println(err.Error())
@@ -72,10 +60,6 @@ var listCmd = &cobra.Command{
 	Short: "list resource",
 	Long:  `可以查询某个命名空间下所有deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if !ArgsCheck(args){
-			fmt.Println("args Error")
-			return
-		}
 		ns, _ := cmd.Flags().GetString("namespace")
 		if err := List(ns); err != nil{
 			fmt.Println(err.Error())

@@ -10,13 +10,6 @@ import (
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-func ArgsCheck(args []string)bool{
-	if args[0] == "m" || args[0] == "d"{
-
-	}
-	return true
-}
-
 func Modify(deployname, namespace, value, label, tp string)error{
 	deploy, err := model.Client.AppsV1().Deployments(namespace).Get(context.TODO(), deployname, v1.GetOptions{})
 	if err != nil{
