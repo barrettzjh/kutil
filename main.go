@@ -35,6 +35,7 @@ func main() {
 			//_label, _ := cmd.Flags().GetString("label")
 			_type, _ := cmd.Flags().GetString("type")
 
+			fmt.Println(_namespace,_type)
 			deploy, err := model.Client.AppsV1().Deployments(_namespace).Get(context.TODO(), args[1], v1.GetOptions{})
 			if err != nil{
 				fmt.Println(err.Error())
