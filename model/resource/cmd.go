@@ -9,7 +9,6 @@ var Cmd = &cobra.Command{
 	Use:   "resource [modify] [deploy] [100Mi]",
 	Short: "modify, create or delete resource",
 	Long:  `可通过简短的命令行，来创建,修改或删除deploy的Resource配置`,
-	Args:  cobra.MinimumNArgs(3),
 	Run: func(cmd *cobra.Command, args []string) {
 		if !ArgsCheck(args){
 			fmt.Println("args Error")
@@ -25,13 +24,18 @@ var Cmd = &cobra.Command{
 				return
 			}
 		}else if args[0] == "create"{
-			if err := Create(args[1], ns, args[2], lb, tp);err != nil{
+			if err := Create(args[1], ns, args[2]);err != nil{
 				fmt.Println(err.Error())
 				return
 			}
 
 		}else if args[0] == "delete"{
-			if err := Delete(args[1], ns, args[2], lb, tp);err != nil{
+			if err := Delete(args[1], ns);err != nil{
+				fmt.Println(err.Error())
+				return
+			}
+		}else if args[0] == "delete"{
+			if err := List(ns);err != nil{
 				fmt.Println(err.Error())
 				return
 			}

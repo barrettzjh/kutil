@@ -37,7 +37,7 @@ func Modify(deployname, namespace, value, label, tp string)error{
 	}
 	return nil
 }
-func Create(deployname, namespace, value, label, tp string)error{
+func Create(deployname, namespace, value string)error{
 	deploy, err := model.Client.AppsV1().Deployments(namespace).Get(context.TODO(), deployname, v1.GetOptions{})
 	if err != nil{
 		fmt.Println(err.Error())
@@ -70,7 +70,7 @@ func Create(deployname, namespace, value, label, tp string)error{
 	}
 	return nil
 }
-func Delete(deployname, namespace, value, label, tp string)error{
+func Delete(deployname, namespace string)error{
 	deploy, err := model.Client.AppsV1().Deployments(namespace).Get(context.TODO(), deployname, v1.GetOptions{})
 	if err != nil{
 		fmt.Println(err.Error())
@@ -83,6 +83,19 @@ func Delete(deployname, namespace, value, label, tp string)error{
 	if err != nil{
 		fmt.Println(err.Error())
 		return err
+	}
+	return nil
+}
+
+func List(namespace string)error{
+	deploy, err := model.Client.AppsV1().Deployments(namespace).List(context.TODO(), v1.ListOptions{})
+	if err != nil{
+		fmt.Println(err.Error())
+		return err
+	}
+
+	for _, v := range deploy.Items{
+		fmt.Printf("%s\t%v", v.Name, v.Spec.Template.Spec.Containers[0].Resources)
 	}
 	return nil
 }
