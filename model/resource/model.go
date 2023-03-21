@@ -88,7 +88,7 @@ func List(namespace string)error{
 	}
 
 	for _, v := range deploy.Items{
-		fmt.Printf("%s\t%v", v.Name, v.Spec.Template.Spec.Containers[0].Resources)
+		fmt.Printf("%s\t%s\n", v.Name, v.Spec.Template.Spec.Containers[0].Resources.String())
 	}
 	return nil
 }
