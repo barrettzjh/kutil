@@ -68,7 +68,7 @@ func main() {
 		},
 	}
 
-	rootCmd.Flags().StringP("namespace", "n", "default", "Namespace of the kubernetes")
+	resourceCmd.Flags().StringP("namespace", "n", "default", "Namespace of the kubernetes")
 	resourceCmd.Flags().StringP("label", "l", "all", "request or limit")
 	resourceCmd.Flags().StringP("type", "t", "", "cpu or memory")
 	rootCmd.AddCommand(resourceCmd)
