@@ -27,15 +27,15 @@ var (
 
 func init() {
 	Cmd.AddCommand(createCmd, deleteCmd, modifyCmd, listCmd)
-	modifyCmd.Flags().StringVarP(&createCmdOpts.Namespace, "namespace", "n", defaultNamespace, "Namespace of the kubernetes")
-	modifyCmd.Flags().StringVarP(&createCmdOpts.Label, "label", "l", defaultLabel, "request or limit")
-	modifyCmd.Flags().StringVarP(&createCmdOpts.Type, "type", "t", "", "cpu or memory")
+	modifyCmd.Flags().StringVarP(&modifyCmdOpts.Namespace, "namespace", "n", defaultNamespace, "Namespace of the kubernetes")
+	modifyCmd.Flags().StringVarP(&modifyCmdOpts.Label, "label", "l", defaultLabel, "request or limit")
+	modifyCmd.Flags().StringVarP(&modifyCmdOpts.Type, "type", "t", "", "cpu or memory")
 
 	deleteCmd.Flags().StringVarP(&deleteCmdOpts.Namespace, "namespace", "n", defaultNamespace, "Namespace of the kubernetes")
 
 	listCmd.Flags().StringVarP(&listCmdOpts.Namespace, "namespace", "n", defaultNamespace, "Namespace of the kubernetes")
 
-	createCmd.Flags().StringVarP(&modifyCmdOpts.Namespace, "namespace", "n", defaultNamespace, "Namespace of the kubernetes")
+	createCmd.Flags().StringVarP(&createCmdOpts.Namespace, "namespace", "n", defaultNamespace, "Namespace of the kubernetes")
 
 }
 
