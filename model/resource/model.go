@@ -19,7 +19,10 @@ func modify(deployname, namespace, value, label, tp string)error{
 	if label == "request"{
 		deploy.Spec.Template.Spec.Containers[0].Resources.Requests[v12.ResourceName(tp)] = resource2.MustParse(value)
 	}else if label == "limit"{
-		deploy.Spec.Template.Spec.Containers[0].Resources.Limits[v12.ResourceName(tp)] = resource2.MustParse("100m")
+		deploy.Spec.Template.Spec.Containers[0].Resources.Limits[v12.ResourceName(tp)] = resource2.MustParse(value)
+	}else if label == "all" {
+		deploy.Spec.Template.Spec.Containers[0].Resources.Requests[v12.ResourceName(tp)] = resource2.MustParse(value)
+		deploy.Spec.Template.Spec.Containers[0].Resources.Limits[v12.ResourceName(tp)] = resource2.MustParse(value)
 	}
 
 	_, err = model.Client.AppsV1().Deployments(namespace).Update(context.TODO(), deploy, v1.UpdateOptions{})
