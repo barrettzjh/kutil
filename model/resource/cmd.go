@@ -54,6 +54,7 @@ var modifyCmd = &cobra.Command{
 	Short: "modify resource",
 	Long:  `可以修改某个命名空间下某个deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println(args[0], args[1], modifyCmdOpts)
 		if len(args) <2 || args[0] == "" || args[1] == "" || modifyCmdOpts.Namespace == "" || modifyCmdOpts.Type == "" || modifyCmdOpts.Label == ""{
 			fmt.Fprintln(os.Stderr, "invalid args")
 			os.Exit(1)
