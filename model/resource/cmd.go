@@ -3,6 +3,7 @@ package resource
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"os"
 )
 
 type CmdOptions struct {
@@ -53,7 +54,11 @@ var modifyCmd = &cobra.Command{
 	Short: "modify resource",
 	Long:  `可以修改某个命名空间下某个deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := modify(args[1], modifyCmdOpts.Namespace, args[2], modifyCmdOpts.Label, modifyCmdOpts.Type); err != nil{
+		if args[0] == "" || args[1] == "" || modifyCmdOpts.Namespace == "" || modifyCmdOpts.Type == "" || modifyCmdOpts.Label == ""{
+			fmt.Fprintln(os.Stderr, "invalid args")
+			os.Exit(1)
+		}
+		if err := modify(args[0], modifyCmdOpts.Namespace, args[1], modifyCmdOpts.Label, modifyCmdOpts.Type); err != nil{
 			fmt.Println(err.Error())
 			return
 		}
@@ -65,7 +70,11 @@ var createCmd = &cobra.Command{
 	Short: "create resource",
 	Long:  `可以创建某个命名空间下某个deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := create(args[1], createCmdOpts.Namespace, args[2]); err != nil{
+		if args[0] == "" || args[1] == "" || createCmdOpts.Namespace == "" {
+			fmt.Fprintln(os.Stderr, "invalid args")
+			os.Exit(1)
+		}
+		if err := create(args[0], createCmdOpts.Namespace, args[1]); err != nil{
 			fmt.Println(err.Error())
 			return
 		}
@@ -77,7 +86,11 @@ var deleteCmd = &cobra.Command{
 	Short: "delete resource",
 	Long:  `可以删除某个命名空间下某个deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := delete(args[1], deleteCmdOpts.Namespace); err != nil{
+		if args[0] == "" || deleteCmdOpts.Namespace == ""{
+			fmt.Fprintln(os.Stderr, "invalid args")
+			os.Exit(1)
+		}
+		if err := delete(args[0], deleteCmdOpts.Namespace); err != nil{
 			fmt.Println(err.Error())
 			return
 		}
@@ -89,6 +102,10 @@ var listCmd = &cobra.Command{
 	Short: "list resource",
 	Long:  `可以查询某个命名空间下所有deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
+		if listCmdOpts.Namespace == "" {
+			fmt.Fprintln(os.Stderr, "invalid args")
+			os.Exit(1)
+		}
 		if err := list(listCmdOpts.Namespace); err != nil{
 			fmt.Println(err.Error())
 			return
