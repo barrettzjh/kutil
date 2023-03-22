@@ -54,7 +54,7 @@ var modifyCmd = &cobra.Command{
 	Short: "modify resource",
 	Long:  `可以修改某个命名空间下某个deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if args[0] == "" || args[1] == "" || modifyCmdOpts.Namespace == "" || modifyCmdOpts.Type == "" || modifyCmdOpts.Label == ""{
+		if len(args) <2 || args[0] == "" || args[1] == "" || modifyCmdOpts.Namespace == "" || modifyCmdOpts.Type == "" || modifyCmdOpts.Label == ""{
 			fmt.Fprintln(os.Stderr, "invalid args")
 			os.Exit(1)
 		}
@@ -70,7 +70,7 @@ var createCmd = &cobra.Command{
 	Short: "create resource",
 	Long:  `可以创建某个命名空间下某个deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if args[0] == "" || args[1] == "" || createCmdOpts.Namespace == "" {
+		if len(args) <2 || args[0] == "" || args[1] == "" || createCmdOpts.Namespace == "" {
 			fmt.Fprintln(os.Stderr, "invalid args")
 			os.Exit(1)
 		}
@@ -86,7 +86,7 @@ var deleteCmd = &cobra.Command{
 	Short: "delete resource",
 	Long:  `可以删除某个命名空间下某个deploy的资源限制`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if args[0] == "" || deleteCmdOpts.Namespace == ""{
+		if len(args) <1 || args[0] == "" || deleteCmdOpts.Namespace == ""{
 			fmt.Fprintln(os.Stderr, "invalid args")
 			os.Exit(1)
 		}
