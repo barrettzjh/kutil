@@ -13,7 +13,6 @@ import (
 func modify(deployname, namespace, value, label, tp string)error{
 	deploy, err := model.Client.AppsV1().Deployments(namespace).Get(context.TODO(), deployname, v1.GetOptions{})
 	if err != nil{
-		fmt.Println(err.Error())
 		return err
 	}
 
@@ -25,7 +24,6 @@ func modify(deployname, namespace, value, label, tp string)error{
 
 	_, err = model.Client.AppsV1().Deployments(namespace).Update(context.TODO(), deploy, v1.UpdateOptions{})
 	if err != nil{
-		fmt.Println(err.Error())
 		return err
 	}
 	return nil
@@ -33,14 +31,12 @@ func modify(deployname, namespace, value, label, tp string)error{
 func create(deployname, namespace, value string)error{
 	deploy, err := model.Client.AppsV1().Deployments(namespace).Get(context.TODO(), deployname, v1.GetOptions{})
 	if err != nil{
-		fmt.Println(err.Error())
 		return err
 	}
 
 	var resource Resource
 	err = json.Unmarshal([]byte(value), &resource)
 	if err != nil{
-		fmt.Println("解析json失败", err.Error())
 		return err
 	}
 
@@ -58,7 +54,6 @@ func create(deployname, namespace, value string)error{
 
 	_, err = model.Client.AppsV1().Deployments(namespace).Update(context.TODO(), deploy, v1.UpdateOptions{})
 	if err != nil{
-		fmt.Println(err.Error())
 		return err
 	}
 	return nil
@@ -66,7 +61,6 @@ func create(deployname, namespace, value string)error{
 func delete(deployname, namespace string)error{
 	deploy, err := model.Client.AppsV1().Deployments(namespace).Get(context.TODO(), deployname, v1.GetOptions{})
 	if err != nil{
-		fmt.Println(err.Error())
 		return err
 	}
 
@@ -74,7 +68,6 @@ func delete(deployname, namespace string)error{
 
 	_, err = model.Client.AppsV1().Deployments(namespace).Update(context.TODO(), deploy, v1.UpdateOptions{})
 	if err != nil{
-		fmt.Println(err.Error())
 		return err
 	}
 	return nil
@@ -83,7 +76,6 @@ func delete(deployname, namespace string)error{
 func list(namespace string)error{
 	deploy, err := model.Client.AppsV1().Deployments(namespace).List(context.TODO(), v1.ListOptions{})
 	if err != nil{
-		fmt.Println(err.Error())
 		return err
 	}
 
