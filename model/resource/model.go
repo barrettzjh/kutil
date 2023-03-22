@@ -88,7 +88,12 @@ func list(namespace string)error{
 	}
 
 	for _, v := range deploy.Items{
-		fmt.Println(v.Name, v.Spec.Template.Spec.Containers[0].Resources.String())
+		data, err := json.Marshal(v.Spec.Template.Spec.Containers[0].Resources)
+		if err != nil{
+			fmt.Println(err.Error())
+			continue
+		}
+		fmt.Println(v.Name, data)
 	}
 	return nil
 }
