@@ -93,7 +93,7 @@ func list(namespace string)error{
 			fmt.Println(err.Error())
 			continue
 		}
-		fmt.Println(v.Name, data)
+		fmt.Println(v.Name, string(data))
 	}
 	return nil
 }
